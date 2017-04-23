@@ -1,5 +1,6 @@
 import httplib2
 import json
+import sys
 
 h = httplib2.Http(".cache")
 h.add_credentials('admin', 'admin')
@@ -119,12 +120,17 @@ def snmpGET():
 		print "ERROR: ", err
 #########################################################
 
+def Exit():
+	print "Exiting..!!"
+	sys.exit()
+
+
 #Added swicth case Input type
 
 options = {     1: topology,
 		2: portStats,
 		3: snmpGET,
-		4: exit,
+		4: Exit,
 }
 
 print "Please select operation : \n1. Topo \n2. PortStats \n3. SNMPGET \n4. Exit \n \n" 
