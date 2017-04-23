@@ -4,7 +4,8 @@ import json
 h = httplib2.Http(".cache")
 h.add_credentials('admin', 'admin')
 
-operation = raw_input("Enter The Operation index: ")
+# Uncommented below line, use it on your needs.. #swapnasheel
+#operation = raw_input("Enter The Operation index: ")
 
 ####################### Get Network Topology #########################
 
@@ -117,4 +118,18 @@ def snmpGET():
 	except ValueError as err:
 		print "ERROR: ", err
 #########################################################
+
+#Added swicth case Input type
+
+options = {     1: topology,
+		2: portStats,
+		3: snmpGET,
+		4: exit,
+}
+
+print "Please select operation : \n1. Topo \n2. PortStats \n3. SNMPGET \n4. Exit \n \n" 
+num=input()
+options[num]()
+
+
 
