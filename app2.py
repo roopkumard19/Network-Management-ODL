@@ -1,5 +1,6 @@
 import httplib2
 import json
+from collections import OrderedDict
 
 h = httplib2.Http(".cache")
 h.add_credentials('admin', 'admin')
@@ -121,9 +122,145 @@ def snmpGET():
 	except ValueError as err:
 		print "ERROR: ", err
 
-####################################################################
+####################### SYSTEM STATUS #############################################
 
+def sysStatus():
+	url = 'http://127.0.0.1:8181/restconf/operations/snmp:snmp-get'
 
+	system = [('System Description', '1.3.6.1.2.1.1.1.0'),
+		('Local Time', '1.3.6.1.4.1.2021.100.4.0'),
+		('System Uptime', '1.3.6.1.2.1.1.3.0')]
+
+	CPU = [('1-minute Load average', '1.3.6.1.4.1.2021.10.1.3.1'),
+		('5-minute Load average', '1.3.6.1.4.1.2021.10.1.3.2'),
+		 ('15-minute Load average', '1.3.6.1.4.1.2021.10.1.3.3')]
+
+	memory = [('Total', '1.3.6.1.4.1.2021.4.5.0'),
+		('Available', '1.3.6.1.4.1.2021.4.6.0'),
+		('Buffered', '1.3.6.1.4.1.2021.4.14.0'),
+		('Cached', '1.3.6.1.4.1.2021.4.15.0')]
+
+	disk = [('Path where the disk is mounted', '1.3.6.1.4.1.2021.9.1.2.1'),
+		('Path of the device for the partition', '1.3.6.1.4.1.2021.9.1.3.1'),
+		('Total size of the disk/partion (kBytes)', '1.3.6.1.4.1.2021.9.1.6.1'),
+		('Available space on the disk', '1.3.6.1.4.1.2021.9.1.7.1'),
+		('Used space on the disk', '1.3.6.1.4.1.2021.9.1.8.1'),
+		('% space used on disk', '1.3.6.1.4.1.2021.9.1.9.1')]
+
+	system = OrderedDict(system)
+	memory = OrderedDict(memory)
+	disk = OrderedDict(disk)
+	CPU = OrderedDict(CPU)
+
+	print
+	print "######################## System Info ###########################"
+	for oid in system:
+		Param = {
+			    "input":
+				    {
+				        "ip-address": "127.0.0.1",
+				        "oid" : system[oid],
+				        "get-type" : "GET",
+				        "community" : "public"
+		    }
+		}
+	 
+		resp, content = h.request(
+		    uri = url,
+		    method = 'POST',
+		    headers={'Content-Type':'application/json'},
+		    body=json.dumps(Param)
+		    )
+	 
+		Info = json.loads(content)
+		print
+		count = len(Info['output']['results'])	
+		for i in range(count):
+			print  oid + " - ", Info['output']['results'][i]['value']
+	###################################################################################
+	print
+	print
+	print "############################ CPU Info ##########################"
+	for oid in CPU:
+		Param = {
+			    "input":
+				    {
+				        "ip-address": "127.0.0.1",
+				        "oid" : CPU[oid],
+				        "get-type" : "GET",
+				        "community" : "public"
+		    }
+		}
+	 
+		resp, content = h.request(
+		    uri = url,
+		    method = 'POST',
+		    headers={'Content-Type':'application/json'},
+		    body=json.dumps(Param)
+		    )
+	 
+		Info = json.loads(content)
+		print
+		count = len(Info['output']['results'])	
+		for i in range(count):
+			print  oid + " - ", Info['output']['results'][i]['value']
+	#################################################################################
+	print
+	print
+	print "########################### Memory Info (kB) #####################"
+	for oid in memory: 
+		Param = {
+			    "input":
+				    {
+				        "ip-address": "127.0.0.1",
+				        "oid" : memory[oid],
+				        "get-type" : "GET",
+				        "community" : "public"
+		    }
+		}
+	 
+		resp, content = h.request(
+		    uri = url,
+		    method = 'POST',
+		    headers={'Content-Type':'application/json'},
+		    body=json.dumps(Param)
+		    )
+	 
+		Info = json.loads(content)
+		print
+		count = len(Info['output']['results'])	
+		for i in range(count):
+			print  oid + " - ", Info['output']['results'][i]['value']
+
+	##################################################################################
+	print
+	print
+	print "############################ Disk Info (kB) #######################"
+	for oid in disk: 
+		Param = {
+			    "input":
+				    {
+				        "ip-address": "127.0.0.1",
+				        "oid" : disk[oid],
+				        "get-type" : "GET",
+				        "community" : "public"
+		    }
+		}
+	 
+		resp, content = h.request(
+		    uri = url,
+		    method = 'POST',
+		    headers={'Content-Type':'application/json'},
+		    body=json.dumps(Param)
+		    )
+	 
+		Info = json.loads(content)
+		print
+		count = len(Info['output']['results'])	
+		for i in range(count):
+			print  oid + " - ", Info['output']['results'][i]['value']
+	print '##############################################################################'
+	
 
 #####################################################################
 
@@ -137,10 +274,11 @@ def Exit():
 options = {     1: topology,
 		2: portStats,
 		3: snmpGET,
-		4: Exit,
+		4: sysStatus,
+		5: Exit,
 }
 
-print "Please select operation : \n1. Topo \n2. PortStats \n3. SNMPGET \n4. Exit \n \n" 
+print "Please select operation : \n1. Topology \n2. Port Statistics \n3. SNMPGET \n4. System Status \n5. Exit \n" 
 num=input("Enter here: ")
 options[num]()
 
