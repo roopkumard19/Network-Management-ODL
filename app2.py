@@ -1,5 +1,6 @@
 import httplib2
 import json
+import sys
 from collections import OrderedDict
 
 h = httplib2.Http(".cache")
@@ -31,11 +32,11 @@ def topology():
 		print "Link ID - ", topology['link'][i]['link-id']
 		i += 1
 
-####################### Get Port Statistics ###########################
+####################### Get Link Statistics ###########################
 
-def portStats():
+def linkStats():
 	switch = raw_input("Enter the Switch Number: ")
-	port = raw_input("Enter the port number wrt the switch given above: ")
+	link = raw_input("Enter the link number wrt the switch given above: ")
 	url1 = 'http://127.0.0.1:8181/restconf/operational/opendaylight-inventory:nodes/node/openflow:'
 	url2 =  '/node-connector/openflow:'
 	url = url1+switch+url2+switch+':'+port
@@ -43,11 +44,11 @@ def portStats():
 
 	print
 	resp, content = h.request(url, "GET")
-	portStats = json.loads(content)
+	linkStats = json.loads(content)
 	
-	stats1 = portStats['node-connector'][0]
-	stats2 = portStats['node-connector'][0]['opendaylight-port-statistics:flow-capable-node-connector-statistics']
-	stats3 = portStats['node-connector'][0]['address-tracker:addresses'][0]
+	stats1 = linkStats['node-connector'][0]
+	stats2 = linkStats['node-connector'][0]['opendaylight-port-statistics:flow-capable-node-connector-statistics']
+	stats3 = linkStats['node-connector'][0]['address-tracker:addresses'][0]
 
 
 	if portStats:
@@ -105,7 +106,7 @@ def snmpGET():
 		Info = json.loads(content)
 		for key in Info:
 			if key == 'errors':
-				print "Invalid data provided"
+				print "INVALID DATA PROVIDED"
 				print
 				break
 			else:	
@@ -121,6 +122,36 @@ def snmpGET():
 					print
 	except ValueError as err:
 		print "ERROR: ", err
+
+######################### SNMP-SET #################################################
+
+def snmpSET():
+	ip = raw_input("Please enter the IP address: ")
+	oid = raw_input("Please enter the OID: ")
+	community = raw_input("Please enter the community: ")
+	value = raw_input("Please enter the new value: ")
+
+	url = 'http://127.0.0.1:8181/restconf/operations/snmp:snmp-set'
+	Param = {
+		    "input":
+		            {
+		                "ip-address": str(ip),
+		                "oid": str(oid),
+		                "community": community,
+				"value": value
+	    }			
+	}
+	 
+	resp, content = h.request(
+	    uri = url,
+	    method = 'POST',
+	    headers={'Content-Type':'application/json'},
+	    body=json.dumps(Param)
+	    )
+
+	print
+		
+	print "Value Set!"
 
 ####################### SYSTEM STATUS #############################################
 
@@ -151,7 +182,7 @@ def sysStatus():
 	memory = OrderedDict(memory)
 	disk = OrderedDict(disk)
 	CPU = OrderedDict(CPU)
-
+	print '##############################################################################################################'
 	print
 	print "######################## System Info ###########################"
 	for oid in system:
@@ -259,26 +290,29 @@ def sysStatus():
 		count = len(Info['output']['results'])	
 		for i in range(count):
 			print  oid + " - ", Info['output']['results'][i]['value']
-	print '##############################################################################'
+	print '#################################################################################################################'
 	
 
 #####################################################################
 
 def Exit():
-	print "Exiting..!!"
+	print	
+	print "Exiting.."
+	print
 	sys.exit()
 
 while 1:
 #Added swicth case Input type
 
 	options = {     1: topology,
-			2: portStats,
-			3: snmpGET,
-			4: sysStatus,
-			5: Exit,
+			2: linkStats,
+			3: sysStatus,
+			4: snmpGET,
+			5: snmpSET,
+			6: Exit,
 	}
 	print
-	print "Please select operation : \n1. Topology \n2. Port Statistics \n3. SNMPGET \n4. System Status \n5. Exit \n" 
+	print "Please select operation : \n1. Topology \n2. Link Statistics \n3. System Status \n4. Use SNMP-GET \n5. Use SNMP-SET \n6. Exit \n" 
 	num=input("Enter here: ")
 	options[num]()
 
