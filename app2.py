@@ -268,17 +268,17 @@ def Exit():
 	print "Exiting..!!"
 	sys.exit()
 
-
+while 1:
 #Added swicth case Input type
 
-options = {     1: topology,
-		2: portStats,
-		3: snmpGET,
-		4: sysStatus,
-		5: Exit,
-}
-
-print "Please select operation : \n1. Topology \n2. Port Statistics \n3. SNMPGET \n4. System Status \n5. Exit \n" 
-num=input("Enter here: ")
-options[num]()
+	options = {     1: topology,
+			2: portStats,
+			3: snmpGET,
+			4: sysStatus,
+			5: Exit,
+	}
+	print
+	print "Please select operation : \n1. Topology \n2. Port Statistics \n3. SNMPGET \n4. System Status \n5. Exit \n" 
+	num=input("Enter here: ")
+	options[num]()
 
