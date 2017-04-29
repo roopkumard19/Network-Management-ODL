@@ -299,20 +299,17 @@ def realTime():
 	
 	def snmp():
 		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 161; bash"')
+		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -w snmp.pcap -i any port 161; bash"')
 		return True
 	
 	def trap():
 		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 162; bash"')
-		return True		
-		
-	def All():
-		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 161; bash"')
-		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 162; bash"')
-		return True	
+		os.system('sudo tcpdump -w trap.pcap -i any port 162; bash')
+		return True			
 		
 	def Exit():
 		print	
-		print "Exiting.."
+		print "Exiting to Main menu.."
 		print
 		return False
 		
@@ -320,13 +317,12 @@ def realTime():
 	while 1:
 		monitor = {	1: snmp,
 				2: trap,
-				3: All,
-				4: Exit,
+				3: Exit,
 		}
 		
 		
 		print
-		print "Select Opeartion : \n1. Monitor SNMP messages \n2. Monitor SNMP Traps \n3. Monitor All \n4. Exit"
+		print "Select Operation : \n1. Monitor SNMP messages \n2. Monitor SNMP Traps \n3. Exit \n"
 		select=input("Enter here: ")
 		flag = monitor[select]()
 		if not flag:
@@ -334,7 +330,7 @@ def realTime():
 #####################################################################
 def Exit():
 	print	
-	print "Exiting.."
+	print "Exiting the App.."
 	print
 	sys.exit()
 
