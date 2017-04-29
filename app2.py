@@ -1,6 +1,7 @@
 import httplib2
 import json
 import sys
+import os
 from collections import OrderedDict
 
 h = httplib2.Http(".cache")
@@ -294,7 +295,43 @@ def sysStatus():
 	
 
 #####################################################################
+def realTime():
+	
+	def snmp():
+		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 161; bash"')
+		return True
+	
+	def trap():
+		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 162; bash"')
+		return True		
+		
+	def All():
+		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 161; bash"')
+		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 162; bash"')
+		return True	
+		
+	def Exit():
+		print	
+		print "Exiting.."
+		print
+		return False
+		
 
+	while 1:
+		monitor = {	1: snmp,
+				2: trap,
+				3: All,
+				4: Exit,
+		}
+		
+		
+		print
+		print "Select Opeartion : \n1. Monitor SNMP messages \n2. Monitor SNMP Traps \n3. Monitor All \n4. Exit"
+		select=input("Enter here: ")
+		flag = monitor[select]()
+		if not flag:
+			return
+#####################################################################
 def Exit():
 	print	
 	print "Exiting.."
@@ -309,10 +346,11 @@ while 1:
 			3: sysStatus,
 			4: snmpGET,
 			5: snmpSET,
-			6: Exit,
+			6: realTime,
+			7: Exit,
 	}
 	print
-	print "Please select operation : \n1. Topology \n2. Link Statistics \n3. System Status \n4. Use SNMP-GET \n5. Use SNMP-SET \n6. Exit \n" 
+	print "Please select operation : \n1. Topology \n2. Link Statistics \n3. System Status \n4. Use SNMP-GET \n5. Use SNMP-SET \n6. Real-Time-Monitoring \n7. Exit \n" 
 	num=input("Enter here: ")
 	options[num]()
 
