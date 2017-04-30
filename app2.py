@@ -157,6 +157,8 @@ def snmpSET():
 ####################### SYSTEM STATUS #############################################
 
 def sysStatus():
+	print
+	ip = raw_input("Please enter the IP address: ")
 	url = 'http://127.0.0.1:8181/restconf/operations/snmp:snmp-get'
 
 	system = [('System Description', '1.3.6.1.2.1.1.1.0'),
@@ -190,7 +192,7 @@ def sysStatus():
 		Param = {
 			    "input":
 				    {
-				        "ip-address": "127.0.0.1",
+				        "ip-address": str(ip),
 				        "oid" : system[oid],
 				        "get-type" : "GET",
 				        "community" : "public"
@@ -217,7 +219,7 @@ def sysStatus():
 		Param = {
 			    "input":
 				    {
-				        "ip-address": "127.0.0.1",
+				        "ip-address": str(ip),
 				        "oid" : CPU[oid],
 				        "get-type" : "GET",
 				        "community" : "public"
@@ -244,7 +246,7 @@ def sysStatus():
 		Param = {
 			    "input":
 				    {
-				        "ip-address": "127.0.0.1",
+				        "ip-address": str(ip),
 				        "oid" : memory[oid],
 				        "get-type" : "GET",
 				        "community" : "public"
@@ -272,7 +274,7 @@ def sysStatus():
 		Param = {
 			    "input":
 				    {
-				        "ip-address": "127.0.0.1",
+				        "ip-address": str(ip),
 				        "oid" : disk[oid],
 				        "get-type" : "GET",
 				        "community" : "public"
@@ -304,7 +306,7 @@ def realTime():
 	
 	def trap():
 		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -i any port 162; bash"')
-		os.system('sudo tcpdump -w trap.pcap -i any port 162; bash')
+		os.system('sudo gnome-terminal -x sh -c "sudo tcpdump -w snmp.pcap -i any port 162; bash"')
 		return True			
 		
 	def Exit():
