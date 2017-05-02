@@ -2,6 +2,7 @@ import httplib2
 import json
 import sys
 import os
+import crypt,getpass
 from collections import OrderedDict
 
 h = httplib2.Http(".cache")
@@ -336,19 +337,33 @@ def Exit():
 	print
 	sys.exit()
 
-while 1:
-#Added swicth case Input type
-
-	options = {     1: topology,
-			2: linkStats,
-			3: sysStatus,
-			4: snmpGET,
-			5: snmpSET,
-			6: realTime,
-			7: Exit,
-	}
+def main():
+	storedpass=crypt.crypt("cmpe210","K9")
+	#print(storedpass)
 	print
-	print "Please select operation : \n1. Topology \n2. Link Statistics \n3. System Status \n4. Use SNMP-GET \n5. Use SNMP-SET \n6. Real-Time-Monitoring \n7. Exit \n" 
-	num=input("Enter here: ")
-	options[num]()
+	password=getpass.getpass("Please enter the password to continue: ")
+	pascrypt=crypt.crypt(password,"K9")
+	#print(pascrypt)
 
+	if pascrypt==storedpass:
+		while 1:
+		#Added swicth case Input type
+
+			options = {     1: topology,
+					2: linkStats,
+					3: sysStatus,
+					4: snmpGET,
+					5: snmpSET,
+					6: realTime,
+					7: Exit,
+			}
+			print
+			print "Please select operation : \n1. Topology \n2. Link Statistics \n3. System Status \n4. Use SNMP-GET \n5. Use SNMP-SET \n6. Real-Time-Monitoring \n7. Exit \n" 
+			num=input("Enter here: ")
+			options[num]()
+	else:
+		print("You have entered wrong password. Please try again")
+		main()
+
+if __name__=="__main__":
+	main()
