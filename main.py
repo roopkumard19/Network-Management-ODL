@@ -316,7 +316,7 @@ def realTime():
 		print
 		return False	
 
-	os.system('sudo gnome-terminal -x sh -c "python test1.py; bash"')
+	os.system('sudo gnome-terminal -x sh -c "python branch.py; bash"')
 
 	while 1:
 		monitor = {	1: snmp,
