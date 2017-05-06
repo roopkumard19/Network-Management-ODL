@@ -328,7 +328,7 @@ def realTime():
 		print
 		print "Started monitoring Openflow switches.."
 		print
-		print "Select Operation for : \n1. Monitoring SNMP messages \n2. Monitoring SNMP Traps \n3. Exit \n"
+		print "Select Operation for monitoring : \n1.  Legacy devices - Communication \n2. Legacy swicthes - State \n3. Exit \n"
 		select=input("Enter here: ")
 		flag = monitor[select]()
 		if not flag:
@@ -361,7 +361,7 @@ def main():
 					7: Exit,
 			}
 			print
-			print "Please select operation : \n1. Topology \n2. Link Statistics \n3. System Status \n4. Use SNMP-GET \n5. Use SNMP-SET \n6. Real-Time-Monitoring \n7. Exit \n" 
+			print "Please select operation : \n1. Topology \n2. Link Statistics \n3. System Status \n4. Manual Get  \n5. Manual Set \n6. Real-Time-Monitoring \n7. Exit \n" 
 			num=input("Enter here: ")
 			options[num]()
 	else:
