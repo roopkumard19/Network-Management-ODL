@@ -53,7 +53,7 @@ def linkStats():
 	stats3 = linkStats['node-connector'][0]['address-tracker:addresses'][0]
 
 
-	if portStats:
+	if linkStats:
 		print "Node connector - ", stats1['id']
 	
 		print "Flow-node-name - ", stats1['flow-node-inventory:name']
@@ -328,7 +328,7 @@ def realTime():
 		print
 		print "Started monitoring Openflow switches.."
 		print
-		print "Select Operation for monitoring : \n1.  Legacy devices - Communication \n2. Legacy swicthes - State \n3. Exit \n"
+		print "Select Operation for monitoring legacy devices : \n1. Communication \n2. State \n3. Exit \n"
 		select=input("Enter here: ")
 		flag = monitor[select]()
 		if not flag:
