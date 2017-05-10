@@ -1,0 +1,28 @@
+May 05 18:51:06.586 HYPERVISOR: Release 0.2.16-amd64/Linux (tag 2015060118)
+May 05 18:51:06.586 HYPERVISOR: Started on IP = 192.168.56.1, TCP port = 36151.
+May 05 18:51:06.599 HYPERVISOR: exec_cmd: hypervisor version 
+May 05 18:51:06.599 HYPERVISOR: exec_cmd: hypervisor working_dir /home/roop/Desktop/Software-defined-networking-master/SDN Project files/Using VM and Docker containers in GNS3/project-files/dynamips 
+May 05 18:51:06.599 GENERAL: working_dir=/home/roop/Desktop/Software-defined-networking-master/SDN Project files/Using VM and Docker containers in GNS3/project-files/dynamips
+May 05 18:51:06.600 HYPERVISOR: exec_cmd: vm create ESW1 3 c3725 
+May 05 18:51:06.600 VM: VM ESW1 created.
+May 05 18:51:06.600 HYPERVISOR: exec_cmd: vm set_con_tcp_port ESW1 5002 
+May 05 18:51:06.601 HYPERVISOR: exec_cmd: c3725 get_mac_addr ESW1 
+May 05 18:51:06.601 HYPERVISOR: exec_cmd: vm set_nvram ESW1 256 
+May 05 18:51:06.602 HYPERVISOR: exec_cmd: vm set_disk0 ESW1 1 
+May 05 18:51:06.602 HYPERVISOR: exec_cmd: vm get_status ESW1 
+May 05 18:51:06.602 HYPERVISOR: exec_cmd: vm slot_add_binding ESW1 1 0 NM-16ESW 
+May 05 18:51:06.603 HYPERVISOR: exec_cmd: vm set_ios ESW1 /home/roop/GNS3/images/IOS/c3725-adventerprisek9-mz124-15.image 
+May 05 18:51:06.604 HYPERVISOR: exec_cmd: vm set_config ESW1 configs/i3_startup-config.cfg 
+May 05 18:51:14.082 HYPERVISOR: exec_cmd: nio create_udp udp-719fcb46-7dbf-415e-a206-0272ebdc4965 10004 192.168.56.101 10012 
+May 05 18:51:14.083 HYPERVISOR: exec_cmd: vm slot_add_nio_binding ESW1 0 0 udp-719fcb46-7dbf-415e-a206-0272ebdc4965 
+May 05 18:51:14.083 HYPERVISOR: exec_cmd: vm get_status ESW1 
+May 05 18:51:50.217 HYPERVISOR: exec_cmd: vm get_status ESW1 
+May 05 18:51:50.218 HYPERVISOR: exec_cmd: vm slot_remove_nio_binding ESW1 0 0 
+May 05 18:51:50.218 HYPERVISOR: exec_cmd: nio delete udp-719fcb46-7dbf-415e-a206-0272ebdc4965 
+May 05 18:52:50.355 HYPERVISOR: exec_cmd: vm get_status ESW1 
+May 05 18:52:50.357 HYPERVISOR: exec_cmd: vm extract_config ESW1 
+May 05 18:52:50.358 HYPERVISOR: exec_cmd: vm delete ESW1 
+May 05 18:52:50.358 VM: VM ESW1 destroyed.
+May 05 18:52:50.361 HYPERVISOR: exec_cmd: hypervisor stop 
+May 05 18:52:50.700 HYPERVISOR: Stopped.
+May 05 18:52:50.700 GENERAL: reset done.

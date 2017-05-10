@@ -1,0 +1,12 @@
+May 05 18:52:09.194 HYPERVISOR: Release 0.2.16-amd64/Linux (tag 2015060118)
+May 05 18:52:09.194 HYPERVISOR: Started on IP = 192.168.56.1, TCP port = 43465.
+May 05 18:52:09.214 HYPERVISOR: exec_cmd: hypervisor version 
+May 05 18:52:09.214 HYPERVISOR: exec_cmd: hypervisor working_dir /home/roop/Desktop/Software-defined-networking-master/SDN Project files/Using VM and Docker containers in GNS3/project-files/dynamips 
+May 05 18:52:09.214 GENERAL: working_dir=/home/roop/Desktop/Software-defined-networking-master/SDN Project files/Using VM and Docker containers in GNS3/project-files/dynamips
+May 05 18:52:09.214 HYPERVISOR: exec_cmd: nio_bridge create HUB1 
+May 05 18:52:20.542 HYPERVISOR: exec_cmd: nio create_udp udp-dac6bdbd-206c-47d3-9f2f-049091ef1b69 10004 192.168.56.1 10000 
+May 05 18:52:20.550 HYPERVISOR: exec_cmd: nio_bridge add_nio HUB1 udp-dac6bdbd-206c-47d3-9f2f-049091ef1b69 
+May 05 18:52:49.794 HYPERVISOR: exec_cmd: nio_bridge delete HUB1 
+May 05 18:52:49.817 HYPERVISOR: exec_cmd: hypervisor stop 
+May 05 18:52:50.255 HYPERVISOR: Stopped.
+May 05 18:52:50.255 GENERAL: reset done.

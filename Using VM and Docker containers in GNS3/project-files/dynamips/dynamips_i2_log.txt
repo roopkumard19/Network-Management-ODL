@@ -1,0 +1,33 @@
+May 05 18:43:56.731 HYPERVISOR: Release 0.2.16-amd64/Linux (tag 2015060118)
+May 05 18:43:56.732 HYPERVISOR: Started on IP = 192.168.56.1, TCP port = 40091.
+May 05 18:43:56.751 HYPERVISOR: exec_cmd: hypervisor version 
+May 05 18:43:56.752 HYPERVISOR: exec_cmd: hypervisor working_dir /home/roop/Desktop/Software-defined-networking-master/SDN Project files/Using VM and Docker containers in GNS3/project-files/dynamips 
+May 05 18:43:56.752 GENERAL: working_dir=/home/roop/Desktop/Software-defined-networking-master/SDN Project files/Using VM and Docker containers in GNS3/project-files/dynamips
+May 05 18:43:56.752 HYPERVISOR: exec_cmd: vm create R1 2 c7200 
+May 05 18:43:56.752 VM: VM R1 created.
+May 05 18:43:56.753 HYPERVISOR: exec_cmd: vm set_con_tcp_port R1 5002 
+May 05 18:43:56.753 HYPERVISOR: exec_cmd: c7200 get_mac_addr R1 
+May 05 18:43:56.754 HYPERVISOR: exec_cmd: vm get_status R1 
+May 05 18:43:56.754 HYPERVISOR: exec_cmd: vm slot_add_binding R1 0 0 C7200-IO-FE 
+May 05 18:43:56.755 HYPERVISOR: exec_cmd: vm set_ram R1 512 
+May 05 18:43:56.755 HYPERVISOR: exec_cmd: vm set_nvram R1 512 
+May 05 18:43:56.756 HYPERVISOR: exec_cmd: vm get_status R1 
+May 05 18:43:56.756 HYPERVISOR: exec_cmd: vm slot_add_binding R1 2 0 PA-2FE-TX 
+May 05 18:43:56.757 HYPERVISOR: exec_cmd: vm set_disk0 R1 0 
+May 05 18:43:56.757 HYPERVISOR: exec_cmd: vm get_status R1 
+May 05 18:43:56.758 HYPERVISOR: exec_cmd: vm slot_add_binding R1 1 0 PA-2FE-TX 
+May 05 18:43:56.759 HYPERVISOR: exec_cmd: vm set_ios R1 /home/roop/GNS3/images/IOS/c7200-advipservicesk9-mz.152-4.S5.image 
+May 05 18:43:56.759 HYPERVISOR: exec_cmd: vm set_config R1 configs/i2_startup-config.cfg 
+May 05 18:44:03.961 HYPERVISOR: exec_cmd: nio create_udp udp-1e8c56dc-1cf5-4a56-bc13-2a61e9565a6c 10004 192.168.56.101 10010 
+May 05 18:44:03.961 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R1 0 0 udp-1e8c56dc-1cf5-4a56-bc13-2a61e9565a6c 
+May 05 18:44:03.962 HYPERVISOR: exec_cmd: vm get_status R1 
+May 05 18:44:14.033 HYPERVISOR: exec_cmd: nio create_udp udp-3a392ce6-c9e7-486f-adf7-e9588f9a1a07 10005 192.168.56.101 10011 
+May 05 18:44:14.034 HYPERVISOR: exec_cmd: vm slot_add_nio_binding R1 1 0 udp-3a392ce6-c9e7-486f-adf7-e9588f9a1a07 
+May 05 18:44:14.035 HYPERVISOR: exec_cmd: vm get_status R1 
+May 05 18:44:42.912 HYPERVISOR: exec_cmd: vm get_status R1 
+May 05 18:44:42.913 HYPERVISOR: exec_cmd: vm extract_config R1 
+May 05 18:44:42.914 HYPERVISOR: exec_cmd: vm delete R1 
+May 05 18:44:42.914 VM: VM R1 destroyed.
+May 05 18:44:42.915 HYPERVISOR: exec_cmd: hypervisor stop 
+May 05 18:44:43.295 HYPERVISOR: Stopped.
+May 05 18:44:43.295 GENERAL: reset done.
